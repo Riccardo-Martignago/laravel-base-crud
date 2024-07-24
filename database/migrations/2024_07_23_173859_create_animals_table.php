@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('species');
+            $table->integer('age');
             $table->timestamps();
         });
     }
