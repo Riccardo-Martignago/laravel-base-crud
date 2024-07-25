@@ -21,7 +21,7 @@ class AnimalController extends Controller
      */
     public function create()
     {
-        //
+        return view('animals.create');
     }
 
     /**
@@ -29,15 +29,22 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $newAnimal = new Animal();
+        $newAnimal->name = $data['name'];
+        $newAnimal->species = $data['species'];
+        $newAnimal->age = $data['age'];
+        $newAnimal->save();
+
+        return redirect()->route('animals.show', $newAnimal->id);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Animal $animal)
     {
-        $animal = Animal::findOrFail($id);
         return view('animals.show', compact('animal'));
     }
 
