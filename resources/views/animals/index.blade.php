@@ -3,6 +3,7 @@
 @section('main-content')
     <h1>ANIMALI</h1>
     <section>
+        <a href="{{ route ('animals.create')}}">Aggiungi animale</a>
         <article class="card" style="width: 18rem;">
             @foreach ($animals as $animal)
                 <div class="card-body">
