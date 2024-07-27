@@ -53,7 +53,7 @@ class AnimalController extends Controller
      */
     public function edit(Animal $animal)
     {
-        //
+        return view('animals.edit', compact('animal'));
     }
 
     /**
@@ -61,7 +61,9 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
-        //
+        $data = $request->all();
+        $animal->update($data);
+        return redirect()->route('animals.show', $animal);
     }
 
     /**
@@ -69,6 +71,7 @@ class AnimalController extends Controller
      */
     public function destroy(Animal $animal)
     {
-        //
+        $animal->delete();
+        return redirect()->route('animal.index');
     }
 }
