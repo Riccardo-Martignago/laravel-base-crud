@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('main-content')
     <h1>CREA ANIMALE</h1>
     <section>
