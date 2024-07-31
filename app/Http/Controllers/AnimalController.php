@@ -29,15 +29,15 @@ class AnimalController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        $data = $request->validate([
+                'name' => ['required', 'string', 'max:50'],
+                'species' => ['required', 'string', 'max:50'],
+                'age' => ['required', 'integer', 'min:0'],
+            ]);
 
-        $newAnimal = new Animal();
-        $newAnimal->name = $data['name'];
-        $newAnimal->species = $data['species'];
-        $newAnimal->age = $data['age'];
-        $newAnimal->save();
+            $newAnimal = Animal::create($data);
 
-        return redirect()->route('animals.show', $newAnimal->id);
+        return redirect()->route('animals.show', $newAnimal);
     }
 
     /**
@@ -61,7 +61,12 @@ class AnimalController extends Controller
      */
     public function update(Request $request, Animal $animal)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:50'],
+            'species' => ['required', 'string', 'max:50'],
+            'age' => ['required', 'integer', 'min:0'],
+        ]);
+
         $animal->update($data);
         return redirect()->route('animals.show', $animal);
     }
@@ -72,6 +77,6 @@ class AnimalController extends Controller
     public function destroy(Animal $animal)
     {
         $animal->delete();
-        return redirect()->route('animal.index');
+        return redirect()->route('animals.index');
     }
 }
